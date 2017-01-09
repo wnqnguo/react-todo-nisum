@@ -1,19 +1,26 @@
 {
-  "name": "react-todo",
+  "name": "note-taker",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/wnqnguo/react-todo-nisum.git"
-  },
   "author": "",
   "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/wnqnguo/react-todo-nisum/issues"
+  "dependencies": {
+    "babel-core": "^6.2.1",
+    "babel-loader": "^6.2.0",
+    "babel-preset-react": "^6.1.18",
+    "firebase": "^2.3.2",
+    "history": "^1.13.1",
+    "react": "^0.14.3",
+    "react-router": "^1.0.1",
+    "reactfire": "^0.5.0",
+    "webpack": "^1.12.8"
   },
-  "homepage": "https://github.com/wnqnguo/react-todo-nisum#readme"
+  "devDependencies": {
+    "babel-core": "^6.3.13",
+    "webpack": "^1.14.0"
+  }
 }
