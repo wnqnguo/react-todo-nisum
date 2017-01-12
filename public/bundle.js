@@ -19792,17 +19792,11 @@
 	  displayName: 'TodoList',
 
 	  removeHandler: function removeHandler(value) {
-	    console.log("remove");
 	    this.props.onRemove(value);
 	  },
 	  render: function render() {
-	    var createItem = function createItem(itemText) {
-	      console.log("itemText is " + itemText);
-	      return React.createElement(
-	        TodoListItem,
-	        { onRemove: this.removeHandler },
-	        itemText
-	      );
+	    var createItem = function createItem(itemText, index) {
+	      return React.createElement(TodoListItem, { key: index, onRemove: this.removeHandler, text: itemText });
 	    };
 	    var items = this.props.items;
 	    createItem = createItem.bind(this);
@@ -19813,36 +19807,37 @@
 	    );
 	  }
 	});
+
 	module.exports = TodoList;
 
 /***/ },
 /* 161 */
 /***/ function(module, exports, __webpack_require__) {
 
-	"use strict";
+	'use strict';
 
 	var React = __webpack_require__(1);
 	var TodoListItem = React.createClass({
-	  displayName: "TodoListItem",
+	  displayName: 'TodoListItem',
 
 	  removeHandler: function removeHandler() {
-	    this.props.onRemove(this.props.children);
+	    this.props.onRemove(this.props.text);
 	  },
 	  render: function render() {
-	    console.log("inside of todo item " + this.props);
 	    return React.createElement(
-	      "li",
+	      'li',
 	      null,
-	      this.props.children,
-	      " ",
+	      this.props.text,
+	      ' ',
 	      React.createElement(
-	        "button",
+	        'button',
 	        { onClick: this.removeHandler },
-	        "remove"
+	        'remove'
 	      )
 	    );
 	  }
 	});
+
 	module.exports = TodoListItem;
 
 /***/ },
@@ -19852,7 +19847,6 @@
 	'use strict';
 
 	var React = __webpack_require__(1);
-	var ReactDOM = __webpack_require__(158);
 	var TodoForm = React.createClass({
 	  displayName: 'TodoForm',
 
@@ -19863,7 +19857,6 @@
 	    e.preventDefault();
 	    this.props.onFormSubmit(this.state.item);
 	    this.setState({ item: '' });
-	    React.findDOMNode(this.refs.item).focus();
 	    return;
 	  },
 	  onChange: function onChange(e) {

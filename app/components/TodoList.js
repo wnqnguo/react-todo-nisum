@@ -2,14 +2,12 @@ var React = require('react');
 var TodoListItem = require('./TodoListItem');
 var TodoList = React.createClass ({
   removeHandler: function(value){
-    console.log("remove");
     this.props.onRemove(value);
   },
   render: function(){
-    var createItem = function(itemText){
-      console.log("itemText is "+itemText);
+    var createItem = function(itemText, index){
       return (
-        <TodoListItem onRemove={this.removeHandler}>{itemText}</TodoListItem>
+        <TodoListItem key={index} onRemove={this.removeHandler} text={itemText} />
       );
     };
     var items = this.props.items;
@@ -17,4 +15,5 @@ var TodoList = React.createClass ({
     return <ul>{this.props.items.map(createItem)}</ul>
   }
 });
+
 module.exports = TodoList;

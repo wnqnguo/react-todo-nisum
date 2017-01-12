@@ -14,7 +14,7 @@ var TodoApp = React.createClass ({
   },
   removeItems: function(value){
     var allItems = this.state.items.filter(function(element){
-      return element!==value;
+      return element !== value;
     });
     console.log("all items "+ allItems);
     console.log("removing items" + value);

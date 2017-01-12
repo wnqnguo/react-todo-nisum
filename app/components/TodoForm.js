@@ -1,5 +1,4 @@
 var React = require('react');
-var ReactDOM = require('react-dom');
 var TodoForm = React.createClass({
   getInitialState: function(){
     return {item: ''};
@@ -8,7 +7,6 @@ var TodoForm = React.createClass({
     e.preventDefault();
     this.props.onFormSubmit(this.state.item);
     this.setState({item: ''});
-    React.findDOMNode(this.refs.item).focus();
     return;
   },
   onChange: function(e){
