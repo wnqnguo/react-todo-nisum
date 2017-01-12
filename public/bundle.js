@@ -52,31 +52,18 @@
 	var TodoList = __webpack_require__(160);
 	var TodoForm = __webpack_require__(162);
 
+	var items = ['Todo item #1', 'Todo item #2'];
+
 	var TodoApp = React.createClass({
 	  displayName: 'TodoApp',
 
-	  getInitialState: function getInitialState() {
-	    return { items: ['Todo item #1', 'Todo item #2'] };
-	  },
-	  addItems: function addItems(newItem) {
-	    var allItems = this.state.items.concat([newItem]);
-	    this.setState({ items: allItems });
-	  },
-	  removeItems: function removeItems(value) {
-	    var allItems = this.state.items.filter(function (element) {
-	      return element !== value;
-	    });
-	    console.log("all items " + allItems);
-	    console.log("removing items" + value);
-	    this.setState({ items: allItems });
-	  },
 	  render: function render() {
 	    return React.createElement(
 	      'div',
 	      null,
 	      React.createElement(TodoBanner, null),
-	      React.createElement(TodoList, { items: this.state.items, onRemove: this.removeItems }),
-	      React.createElement(TodoForm, { onFormSubmit: this.addItems })
+	      React.createElement(TodoList, { items: items }),
+	      React.createElement(TodoForm, null)
 	    );
 	  }
 
@@ -19788,22 +19775,20 @@
 
 	var React = __webpack_require__(1);
 	var TodoListItem = __webpack_require__(161);
+
 	var TodoList = React.createClass({
 	  displayName: 'TodoList',
-
-	  removeHandler: function removeHandler(value) {
-	    this.props.onRemove(value);
+	  getItemElements: function getItemElements(items) {
+	    return items.map(function (itemText, index) {
+	      return React.createElement(TodoListItem, { key: index, text: itemText, onRemove: function onRemove() {} });
+	    });
 	  },
+
 	  render: function render() {
-	    var createItem = function createItem(itemText, index) {
-	      return React.createElement(TodoListItem, { key: index, onRemove: this.removeHandler, text: itemText });
-	    };
-	    var items = this.props.items;
-	    createItem = createItem.bind(this);
 	    return React.createElement(
 	      'ul',
 	      null,
-	      this.props.items.map(createItem)
+	      this.getItemElements(this.props.items)
 	    );
 	  }
 	});
@@ -19820,10 +19805,9 @@
 	var TodoListItem = React.createClass({
 	  displayName: 'TodoListItem',
 
-	  removeHandler: function removeHandler() {
-	    this.props.onRemove(this.props.text);
-	  },
 	  render: function render() {
+	    var _this = this;
+
 	    return React.createElement(
 	      'li',
 	      null,
@@ -19831,7 +19815,9 @@
 	      ' ',
 	      React.createElement(
 	        'button',
-	        { onClick: this.removeHandler },
+	        { onClick: function onClick() {
+	            _this.props.onRemove(_this.props.text);
+	          } },
 	        'remove'
 	      )
 	    );
@@ -19850,25 +19836,11 @@
 	var TodoForm = React.createClass({
 	  displayName: 'TodoForm',
 
-	  getInitialState: function getInitialState() {
-	    return { item: '' };
-	  },
-	  handleSubmit: function handleSubmit(e) {
-	    e.preventDefault();
-	    this.props.onFormSubmit(this.state.item);
-	    this.setState({ item: '' });
-	    return;
-	  },
-	  onChange: function onChange(e) {
-	    this.setState({
-	      item: e.target.value
-	    });
-	  },
 	  render: function render() {
 	    return React.createElement(
 	      'form',
-	      { onSubmit: this.handleSubmit },
-	      React.createElement('input', { type: 'text', ref: 'item', onChange: this.onChange, value: this.state.item }),
+	      null,
+	      React.createElement('input', { type: 'text' }),
 	      React.createElement('input', { type: 'submit', value: 'Add' })
 	    );
 	  }

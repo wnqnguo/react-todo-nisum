@@ -1,10 +1,7 @@
 var React = require('react');
 var TodoListItem = React.createClass({
-  removeHandler: function(){
-    this.props.onRemove(this.props.text);
-  },
   render: function(){
-    return <li>{this.props.text} <button onClick={this.removeHandler}>remove</button></li>;
+    return <li>{this.props.text} <button onClick={() => {this.props.onRemove(this.props.text)}}>remove</button></li>;
   }
 });
 
